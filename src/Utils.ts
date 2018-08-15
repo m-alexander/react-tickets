@@ -1,3 +1,4 @@
+import { TicketModel } from './models/Ticket';
 require('es6-promise').polyfill();
 import axios from 'axios';
 
@@ -18,7 +19,12 @@ export function loadCurrencyRates() {
 				usd: response.data.RUB_USD.val,
 			};
 		})
-		.catch(() => rates = {});
+		.catch(() => {
+			rates = {
+				eur: 0.013152,
+				usd: 0.0149,
+			};
+		});
 }
 
 export function convertPrice(price: number, currency: string): { price: number, symbol: string } {
@@ -33,4 +39,10 @@ export function pluralize(count: number, words: [string, string, string]): strin
 	const cases = [2, 0, 1, 1, 1, 2];
 	const index = (count % 100 > 4 && count % 100 < 20) ? 2 : cases[Math.min(count % 10, 5)];
 	return words[index];
+}
+
+export function getTickets(): Promise<TicketModel[]> {
+	return axios.get('/tickets.json')
+		.then(response => response.data.tickets)
+		.catch(() => []);
 }

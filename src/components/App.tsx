@@ -6,11 +6,9 @@ import Options from './Options';
 import { TicketModel } from '../models/Ticket';
 import { OptionsModel } from '../models/Options';
 
-import { loadCurrencyRates } from '../Utils';
+import { loadCurrencyRates, getTickets } from '../Utils';
 
 import './App.scss';
-
-import * as data from '../tickets.json';
 
 interface AppState {
 	tickets: TicketModel[];
@@ -19,21 +17,20 @@ interface AppState {
 
 export default class App extends React.Component<{}, AppState> {
 	state: AppState = {
-		tickets: data.tickets,
+		tickets: [],
 		options: {
 			stops: [0, 1, 2, 3],
 			currency: 'rub'
 		}
 	};
 
-	constructor(props: {}) {
-		super(props);
-
+	componentDidMount() {
 		loadCurrencyRates();
+		getTickets().then(tickets => this.setState({ tickets }));
 	}
 
 	filteredList(): TicketModel[] {
-		let tickets: TicketModel[] = [...data.tickets];
+		let tickets: TicketModel[] = [...this.state.tickets];
 
 		const { stops } = this.state.options;
 		tickets = tickets.filter((item: TicketModel) => {
