@@ -48,7 +48,7 @@ export default class Checkboxes extends React.Component<CheckboxesProps> {
         </label>
       {
         items.map(item => (
-          <label>
+          <label key={item.title}>
             <input
               type="checkbox"
               checked={value.indexOf(item.value) > -1}
