@@ -19,7 +19,7 @@ module.exports = {
 		rules: [
 			{ test: /\.(gif|jpe?g|png|ico)$/, loader: 'url-loader?limit=5000' },
 			{ test: /\.tsx?$/, loader: 'awesome-typescript-loader' },
-			{ enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' },
+			{ enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' }
 		]
 	},
 
