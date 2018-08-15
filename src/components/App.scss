@@ -1,0 +1,23 @@
+.content {
+  display: flex;
+  flex-direction: column;
+
+  margin: 0 auto;
+	width: 818px;
+
+	&__logo {
+		margin: 42px auto 33px;
+		width: 78px;
+	}
+
+	&__columns {
+		display: flex;
+		align-items: flex-start;
+	}
+}
+
+.tickets__empty {
+	margin: 10px 0;
+	text-align: center;
+}
+

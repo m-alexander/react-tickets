@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import './Toggle.scss'
+
 interface ToggleProps {
   items: string[];
   value: string;
@@ -11,21 +13,17 @@ export default class Toggle extends React.Component<ToggleProps> {
     const { items, value, onChange } = this.props;
 
     return (
-      <div className="toggle">
+      <ul className="toggle">
         {
-          items.map((item) =>
-            <label key={item}>
-              <input
-                type="radio"
-                value={item}
-                checked={item === value}
-                onChange={() => onChange(item)}
-              />
-              {item}
-            </label>
-          )
+          items.map((item) => {
+            let className = 'toggle__item';
+            if (item === value) {
+              className += ' is-active';
+            }
+            return <li key={item} className={className} onClick={() => onChange(item)}>{item}</li>;
+          })
         }
-      </div>
+      </ul>
     );
   }
 }

@@ -6,7 +6,9 @@ import Options from './Options';
 import { TicketModel } from '../models/Ticket';
 import { OptionsModel } from '../models/Options';
 
-import { loadCurrencyRates, convertPrice } from '../Utils';
+import { loadCurrencyRates } from '../Utils';
+
+import './App.scss';
 
 import * as data from '../tickets.json';
 
@@ -24,25 +26,19 @@ export default class App extends React.Component<{}, AppState> {
 		}
 	};
 
-	constructor() {
-		super({});
+	constructor(props: {}) {
+		super(props);
 
 		loadCurrencyRates();
 	}
 
 	filteredList(): TicketModel[] {
-		const { stops, currency } = this.state.options;
+		let tickets: TicketModel[] = [...data.tickets];
 
-		let tickets: TicketModel[] = data.tickets;
-
+		const { stops } = this.state.options;
 		tickets = tickets.filter((item: TicketModel) => {
 			return stops.indexOf(item.stops) > -1;
 		});
-
-		tickets = tickets.map((ticket) => ({
-			...ticket,
-			price: convertPrice(ticket.price, currency),
-		}));
 
 		tickets.sort((a, b) => a.price - b.price);
 
@@ -51,20 +47,28 @@ export default class App extends React.Component<{}, AppState> {
 
 	render() {
 		const list = this.filteredList();
+		const { currency } = this.state.options;
 
 		return (
 			<div className="content">
-				<Options
-					value={this.state.options}
-					onChange={(options) => this.setState({ options })}
-				/>
-				<div className="tickets">
-					{list.map((ticket: any) =>
-						<Ticket
-							key={list.indexOf(ticket)}
-							ticket={ticket}
-						/>
-					)}
+				<img className="content__logo" src={require('../assets/logo.png')} alt="Logo" />
+				<div className="content__columns">
+					<Options
+						value={this.state.options}
+						onChange={(options) => this.setState({ options })}
+					/>
+					<div className="tickets">
+						{list.map((ticket: any) =>
+							<Ticket
+								key={list.indexOf(ticket)}
+								ticket={ticket}
+								currency={currency}
+							/>
+						)}
+						{list.length === 0 &&
+							<div className="tickets-empty">По вашему запросу ничего не найдено</div>
+						}
+					</div>
 				</div>
 			</div>
 		);

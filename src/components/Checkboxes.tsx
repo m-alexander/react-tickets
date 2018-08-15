@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import './Checkboxes.scss'
+
 interface CheckboxesProps {
   items: {
     title: string;
@@ -33,29 +35,48 @@ export default class Checkboxes extends React.Component<CheckboxesProps> {
     }
   }
 
+  toggleOnly(item: any) {
+    this.props.onChange([item]);
+  }
+
   render() {
     const { items, value } = this.props;
 
     return (
-      <div>
-        <label>
-          <input
-            type="checkbox"
-            checked={value.length === items.length}
-            onChange={() => this.toggleAll()}
-          />
-          Все
-        </label>
+      <div className="checkboxes">
+        <div className="checkboxes__item">
+          <label className="checkboxes__label">
+            <span className="checkbox">
+              <input
+                className="checkbox__field"
+                type="checkbox"
+                checked={value.length === items.length}
+                onChange={() => this.toggleAll()}
+              />
+              <span className="checkbox__face"></span>
+            </span>
+            Все
+          </label>
+        </div>
       {
         items.map(item => (
-          <label key={item.title}>
-            <input
-              type="checkbox"
-              checked={value.indexOf(item.value) > -1}
-              onChange={() => this.toggleOne(item.value)}
-            />
-            {item.title}
-          </label>
+          <div className="checkboxes__item" key={item.title}>
+            <label className="checkboxes__label">
+              <span className="checkbox">
+                <input
+                  className="checkbox__field"
+                  type="checkbox"
+                  checked={value.indexOf(item.value) > -1}
+                  onChange={() => this.toggleOne(item.value)}
+                />
+                <span className="checkbox__face"></span>
+              </span>
+              {item.title}
+            </label>
+            <div className="checkboxes__only" onClick={() => this.toggleOnly(item.value)}>
+              только
+            </div>
+          </div>
         ))
       }
       </div>
