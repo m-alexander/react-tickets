@@ -1,4 +1,4 @@
 export interface OptionsModel {
-	stops: number[];
-	currency: string;
+  stops: number[];
+  currency: string;
 }

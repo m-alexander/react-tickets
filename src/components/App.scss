@@ -1,37 +1,37 @@
 .content {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-	@media screen and (max-width: 846px) {
-		width: 100%;
-	}
+  @media screen and (max-width: 846px) {
+    width: 100%;
+  }
 
-	margin: 0 auto;
-	width: 818px;
+  margin: 0 auto;
+  width: 818px;
 
-	&__logo {
-		margin: 42px auto 33px;
-		width: 78px;
-	}
+  &__logo {
+    margin: 42px auto 33px;
+    width: 78px;
+  }
 
-	&__columns {
-		display: flex;
-		align-items: flex-start;
+  &__columns {
+    display: flex;
+    align-items: flex-start;
 
-		@media screen and (max-width: 846px) {
-			flex-direction: column;
-		}
-	}
+    @media screen and (max-width: 846px) {
+      flex-direction: column;
+    }
+  }
 
-	&__tickets {
-		@media screen and (max-width: 846px) {
-			margin-top: 20px;
-			width: 100%;
-		}
-	}
+  &__tickets {
+    @media screen and (max-width: 846px) {
+      margin-top: 20px;
+      width: 100%;
+    }
+  }
 }
 
 .tickets__empty {
-	margin: 10px 0;
-	text-align: center;
+  margin: 10px 0;
+  text-align: center;
 }
