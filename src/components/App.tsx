@@ -57,7 +57,7 @@ export default class App extends React.Component<{}, AppState> {
 						value={this.state.options}
 						onChange={(options) => this.setState({ options })}
 					/>
-					<div className="tickets">
+					<div className="content__tickets">
 						{list.map((ticket: any) =>
 							<Ticket
 								key={list.indexOf(ticket)}

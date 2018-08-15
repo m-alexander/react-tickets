@@ -1,8 +1,12 @@
 .content {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-  margin: 0 auto;
+	@media screen and (max-width: 846px) {
+		width: 100%;
+	}
+
+	margin: 0 auto;
 	width: 818px;
 
 	&__logo {
@@ -13,6 +17,17 @@
 	&__columns {
 		display: flex;
 		align-items: flex-start;
+
+		@media screen and (max-width: 846px) {
+			flex-direction: column;
+		}
+	}
+
+	&__tickets {
+		@media screen and (max-width: 846px) {
+			margin-top: 20px;
+			width: 100%;
+		}
 	}
 }
 
@@ -20,4 +35,3 @@
 	margin: 10px 0;
 	text-align: center;
 }
-
