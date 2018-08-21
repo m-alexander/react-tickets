@@ -28,6 +28,7 @@ export default class App extends React.Component<{}, AppState> {
     loadCurrencyRates();
     getTickets()
       .then(tickets => tickets.sort((a, b) => a.price - b.price))
+      .then(tickets => tickets.map((ticket, id) => ({ id, ...ticket })))
       .then(tickets => this.setState({ tickets }));
   }
 
@@ -57,7 +58,7 @@ export default class App extends React.Component<{}, AppState> {
           <div className="content__tickets">
             {list.map((ticket: any) =>
               <Ticket
-                key={list.indexOf(ticket)}
+                key={ticket.id}
                 ticket={ticket}
                 currency={currency}
               />
