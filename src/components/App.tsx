@@ -26,7 +26,9 @@ export default class App extends React.Component<{}, AppState> {
 
   componentDidMount() {
     loadCurrencyRates();
-    getTickets().then(tickets => this.setState({ tickets }));
+    getTickets()
+      .then(tickets => tickets.sort((a, b) => a.price - b.price))
+      .then(tickets => this.setState({ tickets }));
   }
 
   filteredList(): TicketModel[] {
@@ -36,8 +38,6 @@ export default class App extends React.Component<{}, AppState> {
     tickets = tickets.filter((item: TicketModel) => {
       return stops.indexOf(item.stops) > -1;
     });
-
-    tickets.sort((a, b) => a.price - b.price);
 
     return tickets;
   }
